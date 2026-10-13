@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-const Product = ({productData}) => {
+const Product = ({productData,cartItems,setCartItems}) => {
   const [moreData,setMoreData] = useState(null);
 
   const handleMore = (id) =>{
@@ -10,6 +10,16 @@ const Product = ({productData}) => {
   const handleLess = () => {
     setMoreData(null);
   }
+ 
+  const handleCart = (id) => {
+    console.log(id);
+     let newItems = [...cartItems];
+     let arr = productData.find((val) => val.id === id);
+     newItems.push(arr);
+     console.log(newItems);
+     setCartItems(newItems);
+  }
+ 
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 text-white">
@@ -32,7 +42,9 @@ const Product = ({productData}) => {
             
             <div className='mt-10 flex justify-between'>
               <h3 className="text-4xl"><span className="text-4xl">$.</span>{data.price}</h3>
-              <button className="bg-black py-2 px-5 rounded-3xl cursor-pointer hover:scale-105">Add To Cart</button>
+              <button 
+              onClick={() => handleCart(data.id)}
+              className="bg-black py-2 px-5 rounded-3xl cursor-pointer hover:scale-105">Add To Cart</button>
             </div>
          </div>
        })}
