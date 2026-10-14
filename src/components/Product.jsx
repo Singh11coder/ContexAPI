@@ -13,14 +13,52 @@ const Product = ({productData,cartItems,setCartItems}) => {
  
   const handleCart = (id) => {
      console.log(id);
-     
-     let newItems = [...cartItems];
      let arr = productData.find((val) => val.id === id);
-     let newObj = {...arr,quantity:1}
+     let ans = cartItems.find((val) => val.id === arr.id);
+     let newObj;
+     if(ans!==undefined){
+       newObj = {...ans, quantity:ans.quantity + 1}
+     }
+     else{
+       newObj = {...arr,quantity:1}
+     }
+     let newItems = [...cartItems];
+     
      newItems.push(newObj);
      setCartItems(newItems);
   }
+
+  const productQuantity = (id) => {
+      let obj = cartItems.find((val) => val.id === id);
+      return obj.quantity;
+  }
  
+  function handleIncrement(id){
+     let obj = cartItems.map((val) => 
+      val.id === id 
+      ? {...val,quantity:val.quantity+1} 
+      : val
+     )
+
+     setCartItems(obj);
+     
+  }
+
+  function handleDecrement(id){
+    let obj = cartItems.find(val => val.id === id);
+    let arr;
+    if(obj.quantity === 1){
+       arr = cartItems.filter((val) => val.id !== id);
+    }else{
+       arr = cartItems.map((val) => val.id === id
+       ? {...val,quantity:val.quantity-1}
+       : val
+      )
+    }
+     
+    setCartItems(arr);
+
+  }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 text-white">
@@ -43,9 +81,26 @@ const Product = ({productData,cartItems,setCartItems}) => {
             
             <div className='mt-10 flex justify-between'>
               <h3 className="text-4xl"><span className="text-4xl">$.</span>{data.price}</h3>
+              {cartItems.find((val) => val.id === data.id) !== undefined 
+              ?
+               <div 
+                className="bg-black py-2 px-5 rounded-3xl cursor-pointer hover:scale-105 flex justify-between gap-10 text-lg">
+                  <button 
+                  onClick={() => handleDecrement(data.id)}
+                  className='cursor-pointer'
+                  >-</button>
+                  <p>{productQuantity(data.id)}</p>
+                  <button 
+                   onClick={() => handleIncrement(data.id)} 
+                   className='cursor-pointer'
+                  >+</button>
+                </div>
+              : 
               <button 
               onClick={() => handleCart(data.id)}
               className="bg-black py-2 px-5 rounded-3xl cursor-pointer hover:scale-105">Add To Cart</button>
+              }
+              
             </div>
          </div>
        })}

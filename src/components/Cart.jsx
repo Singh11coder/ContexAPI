@@ -3,15 +3,21 @@ import React from 'react'
 const Cart = ({cartItems,setCartItems}) => {
   console.log("From Carts",cartItems);  
   let total = cartItems.reduce((acc,curr) => {
-      acc+=curr.price;
+      acc+=(curr.price) * (curr.quantity);
 
       return acc;
+  },0);
+
+  let qunatity = cartItems.reduce((acc,curr) => {
+       acc += curr.quantity;
+
+       return acc;
   },0);
   return (
     <div>
       <div><h1 className="text-3xl text-white ml-14 mt-10">Shopping Cart ({cartItems.length})</h1></div>
       <div className="">
-        {cartItems.map((item,ind) => {
+        {cartItems.map((item) => {
            return <div className=" flex justify-between w-250  bg-gray-800 m-10 p-10 rounded-4xl text-white text-xl">
                 <div className="w-80 h-50 mr-20 p-2"> 
                   <img src={item.image}/>
@@ -36,6 +42,10 @@ const Cart = ({cartItems,setCartItems}) => {
            <div className="flex justify-between mt-8 mb-4">
              <h3>Items</h3>
              <h3 className="text-xl text-green-500">{cartItems.length}</h3>
+           </div>
+            <div className="flex justify-between mb-4">
+            <h3>Qunatity</h3>
+            <h3 className="text-xl text-green-500">{qunatity}</h3>
            </div>
            <div className="flex justify-between mb-4">
             <h3>Total</h3>
