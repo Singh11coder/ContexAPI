@@ -19,11 +19,15 @@ const Cart = ({cartItems,setCartItems}) => {
                 <div>
                   <h1><span className="text-red-500">Title: </span>{item.title}</h1>
                   <h1><span className="text-red-500">Description: </span>{item.description}</h1>
-                  <div className="flex justify-between mt-8">
+                  <div className="flex justify-between mt-10">
                     <h1 className="text-2xl">⭐4.1(259)</h1>
-                    <h1 className="text-green-500 text-2xl">${item.price}</h1>
+                    <div className="flex items-center gap-20">
+                        <h1 className="bg-white px-4 py-2 rounded-xl text-green-700 font-bold">quantity:{item.quantity}</h1>
+                        <h1 className="text-green-500 text-2xl">${item.price}</h1>
+                    </div>
+                  
                   </div>
-                </div>
+                </div>  
                 
             </div>
         })}

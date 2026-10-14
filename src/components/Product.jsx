@@ -12,11 +12,12 @@ const Product = ({productData,cartItems,setCartItems}) => {
   }
  
   const handleCart = (id) => {
-    console.log(id);
+     console.log(id);
+     
      let newItems = [...cartItems];
      let arr = productData.find((val) => val.id === id);
-     newItems.push(arr);
-     console.log(newItems);
+     let newObj = {...arr,quantity:1}
+     newItems.push(newObj);
      setCartItems(newItems);
   }
  

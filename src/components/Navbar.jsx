@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Navbar = ({setToggle,toggle}) => {
+const Navbar = ({setToggle,toggle,cartItems}) => {
   return (
     <div className="rounded-4xl flex bg-blue-700 justify-between px-20 py-6 text-4xl text-white items-center">
        <div className="bg-red-800 py-4 px-8 rounded-4xl">🛒 Shop</div>
@@ -13,7 +13,11 @@ const Navbar = ({setToggle,toggle}) => {
          <button 
          onClick={() => setToggle(prev => !prev)}
          className="bg-black py-4 px-8 rounded-4xl cursor-pointer hover:scale-105 ">
-          {toggle ? "Products" :"View Cart"}</button>
+          {toggle 
+          ? <h2>Products</h2> 
+          :<h2>View Cart 
+          {cartItems.length !== 0 
+          && <span className="bg-red-700 px-4 ml-4 pb-1 rounded-full ">{cartItems.length}</span>}</h2>}</button>
        </div>
     </div>
   )

@@ -21,7 +21,7 @@ const App = () => {
   },[])
   return (
     <div className="bg-gray-600 p-10 ">
-       <Navbar setToggle={setToggle} toggle={toggle}/>
+       <Navbar setToggle={setToggle} toggle={toggle} cartItems={cartItems}/>
 
        {!toggle 
         ?
