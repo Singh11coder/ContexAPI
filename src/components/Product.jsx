@@ -1,6 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState, useContext} from 'react';
+import MyStore from '../context/MyContext';
 
-const Product = ({productData,cartItems,setCartItems}) => {
+const Product = ({productData}) => {
+  const {cartItems,setCartItems} = useContext(MyStore);
   const [moreData,setMoreData] = useState(null);
 
   const handleMore = (id) =>{

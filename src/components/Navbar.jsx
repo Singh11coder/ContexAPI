@@ -1,6 +1,8 @@
-import React from 'react'
+import React,{useContext} from 'react';
+import MyStore from '../context/MyContext';
 
-const Navbar = ({setToggle,toggle,cartItems}) => {
+const Navbar = () => {
+  const {setToggle,toggle,cartItems} = useContext(MyStore);
   return (
     <div className="rounded-4xl flex bg-blue-700 justify-between px-20 py-6 text-4xl text-white items-center">
        <div className="bg-red-800 py-4 px-8 rounded-4xl">🛒 Shop</div>

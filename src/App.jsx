@@ -1,14 +1,16 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import Navbar from './components/Navbar';
 import axios from 'axios';
 import Product from './components/Product';
 import Cart from './components/Cart';
+import MyStore from './context/MyContext';
+
 
 const App = () => {
 
-  const [toggle,setToggle] = useState(false);
+  const {toggle} = useContext(MyStore);
   const [productData, setProductData] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
+  
 
   const fetchData = async() => {
      const res = await axios.get("https://fakestoreapi.com/products");
@@ -21,16 +23,16 @@ const App = () => {
   },[])
   return (
     <div className="bg-gray-600 p-10 ">
-       <Navbar setToggle={setToggle} toggle={toggle} cartItems={cartItems}/>
+       <Navbar />
 
        {!toggle 
         ?
           <div className='m-10 '>
-          <Product productData={productData} cartItems={cartItems} setCartItems={setCartItems} />
+          <Product productData={productData} />
        </div>
         :
          <div>
-         <Cart cartItems={cartItems} setCartItems={setCartItems}/>
+         <Cart />
          </div>
        }
       
